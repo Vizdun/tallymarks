@@ -1,7 +1,13 @@
 [package]
 name = "tallymarks"
+description = "Crate for converting numbers to tally marks."
+keywords = ["tally", "marks"]
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/Vizdun/tallymarks"
+repository = "https://github.com/Vizdun/tallymarks"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
