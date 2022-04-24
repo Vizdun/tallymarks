@@ -2,7 +2,7 @@
 name = "tallymarks"
 description = "Crate for converting numbers to tally marks."
 keywords = ["tally", "marks"]
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 readme = "README.md"
