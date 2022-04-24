@@ -25,23 +25,33 @@ mod tests {
     }
 }
 
-const TALLY_MARKS: [&str; 6] = ["", "𝍩", "𝍪", "𝍫", "𝍬", "𝍸"];
+const TALLY_MARKS: [char; 5] = ['𝍩', '𝍪', '𝍫', '𝍬', '𝍸'];
 
-pub fn tally_marks(n: usize) -> String {
+fn gen_marks(n: usize) -> impl Iterator<Item = char> {
     let full = n / 5;
     let rem = n % 5;
 
-    let rem_str = TALLY_MARKS[rem];
+    let rem_char = if rem != 0 {
+        Some(TALLY_MARKS[rem - 1])
+    } else {
+        None
+    };
 
-    TALLY_MARKS[5].repeat(full) + rem_str
+    std::iter::repeat(TALLY_MARKS[4]).take(full).chain(rem_char)
+}
+
+pub fn tally_marks(n: usize) -> String {
+    String::from_iter(gen_marks(n))
 }
 
 pub fn tally_marks_spaced(n: usize) -> String {
-    tally_marks(n).chars().fold(String::new(), |acc, c| {
-        if acc != "" {
-            format!("{} {}", acc, c)
-        } else {
-            format!("{}{}", acc, c)
+    let mut chars = gen_marks(n).peekable();
+    let mut marks = String::with_capacity(chars.size_hint().0 * 4);
+    while let Some(c) = chars.next() {
+        marks.push(c);
+        if chars.peek().is_some() {
+            marks.push(' ')
         }
-    })
+    }
+    marks
 }
